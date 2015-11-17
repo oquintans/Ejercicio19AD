@@ -59,12 +59,16 @@ public class BaseRelacionalB {
         try {
             rs = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE).executeQuery("select * from produtos");
 
-            while (rs.next() != false) {
+            /*while (rs.next() != false) {
                 System.out.print(rs.getString(1) + " - ");
                 System.out.print(rs.getString(2) + " - ");
                 System.out.println(rs.getString(3));
             }
-            rs.close();
+            rs.close();*/
+            rs.afterLast();
+            while (rs.previous()) {
+                System.out.println(rs.getString("codigo") + " " + rs.getInt("prezo") + " " + rs.getString("descricion") + "\n");
+            }
 
         } catch (SQLException ex) {
             Logger.getLogger(BaseRelacionalB.class.getName()).log(Level.SEVERE, null, ex);
